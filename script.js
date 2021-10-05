@@ -54,9 +54,12 @@
 // var historyButton = $(".btn btn-outline-success my-2 my-sm-0");
 var historyGroup = $("#historyButtonGroup");
 
+//this is the array it pushes to
 var arr= [];
 
-
+//this is the array it pulls from
+// arr = [new set(arr)];
+// theroretically
 
 
 // var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon;
@@ -65,36 +68,7 @@ var arr= [];
 
 
 $('#searchArea').on("submit", $("button"), getSearch);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var searchValue = $("input").val();
-
 
 
 
@@ -106,24 +80,15 @@ function getSearch(event) {
     var searchValue = $("input").val();
     console.log("Searching for " + searchValue);
 
-    
-
-
-    
-   
 
 
     arr.unshift(searchValue);
 
 
     
-
     appendHistory();
     saveHistory();
     getAPIs();
-    
-
-    
 
 }
 
@@ -149,7 +114,7 @@ function getAPIs() {
     .then(function (data1) {
         console.log("This is the data of the geocodingApi", data1);
 
-        if (data1[0].name == undefined) {
+        if (data1.length == 0) {
             document.getElementById("alert").style.display = "flex";
             return;
         } else {document.getElementById("alert").style.display = "none"; }
@@ -170,7 +135,7 @@ function getAPIs() {
 
 
         function getWeatherApi () {
-                var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat +"&lon=" + lon + "&appid=5de4fe643c36c638596fa3acd666e2a7"
+                var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat +"&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7"
                 fetch(weatherApi)
 
                     .then (function (response2) {
@@ -187,7 +152,7 @@ function getAPIs() {
                         var daily = data2.daily;
                         console.log("daily: ", daily);
 
-
+                        document.getElementById("hideAway").style.visibility = "visible";
                         document.getElementById("currentName").innerHTML = name;
 
                         document.getElementById("currentIcon").src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
@@ -210,12 +175,50 @@ function getAPIs() {
                         console.log(color);
                         document.getElementById("currentUVI").style.color = color;
 
+                        //area for 5 day forecast
+                        document.getElementById("currentDay").innerHTML = moment.unix(current.dt).format("YYYY, MMMM, dddd");
+
+                        for (n=1;n<6;n++){
+
+                            var dtime = "day"+n+"Time";
+                            var dday = "day"+n+"Day";
+
+                         
+
+                            document.getElementById(dtime).innerHTML = moment.unix(daily[n].dt).format("YYYY, MM, DD");
+                            document.getElementById(dday).innerHTML = moment.unix(daily[n].dt).format("dddd");
+
+
+
+
+
+
+
+
+
+
+                            var Icon = "day"+n+"Icon";
+                            var Temp = "day"+n+"Temp";
+                            var Humidity = "day"+n+"Humidity";
+
+
+                                var temperatureAverage = Math.trunc((daily[n].temp.max + daily[n].temp.min) / 2 );
+                                console.log("Temperature Average", temperatureAverage);
+
+                                document.getElementById(Temp).innerHTML = temperatureAverage
+                                document.getElementById(Humidity).innerHTML = daily[n].humidity
+
+
+                                document.getElementById(Icon).src = "http://openweathermap.org/img/wn/" + daily[n].weather[0].icon + "@2x.png";
+                                document.getElementById(Icon).style.width = "50px";
+                        
+                            // }
+                        }
+
+
                     })
-
-                }
-
+        }
     });
-
 }
 
 
@@ -232,7 +235,7 @@ function loadHistory() {
     
     for(i=0;i<arr.length;i++){
         console.log(arr.length)
-        if (arr.length > 5) {
+        if (arr.length > 6) {
             arr.pop();
 
         };
@@ -247,7 +250,7 @@ function appendHistory() {
     console.log("appending History")
         for(i=0;i<arr.length;i++){
         console.log(arr.length)
-        if (arr.length > 5) {
+        if (arr.length > 6) {
             arr.pop();
 
         };
@@ -261,16 +264,11 @@ function saveHistory() {
     console.log("Saving History")
     arra=[];
 
-    for(x=0; x<5; x++) { 
+    for(x=0; x<6; x++) { 
     arraysave = document.getElementById(x).innerHTML;
     arra.push(arraysave)
     localStorage.setItem("storedHistory", JSON.stringify(arra))
 
-}
-
-
-
-
-
+    }
 }
 
