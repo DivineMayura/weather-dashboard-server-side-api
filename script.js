@@ -105,14 +105,14 @@ function getAPIs() {
 
 
 
-            $.ajax({
-                url: "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7",
-                method: 'GET',
-                dataType: 'JSON',
-            })
+    $.ajax({
+        url: "http:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7",
+        method: 'GET',
+        dataType: 'JSON',
+    })
 
 
-            .done(function(data1){
+        .done(function (data1) {
             console.log(data1)
 
             // });
@@ -152,13 +152,13 @@ function getAPIs() {
             // function getWeatherApi() {
                 // var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7";
                 // fetch(weatherApi)
-                    $.ajax({
-                                    url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7",
-                                    method: 'GET',
-                                    dataType: 'JSON',
-                                })
-                                .done(function(data2){
-                                console.log(data2)
+                $.ajax({
+                    url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7",
+                    method: 'GET',
+                    dataType: 'JSON',
+                })
+                    .done(function (data2) {
+                        console.log(data2)
                     // .then(function (response2) {
                         // console.log("This is the response of the weatherApi", response2);
                         // return response2.json();
