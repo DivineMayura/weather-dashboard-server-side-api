@@ -51,7 +51,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$(document).ready()
+// $(document).ready()
 
 
 var historyGroup = $("#historyButtonGroup");
@@ -59,10 +59,12 @@ var historyGroup = $("#historyButtonGroup");
 //this is the array it pushes to
 var arr = [];
 
+var lon;
+var lat;
+var namee;
 
-
-
-
+var current;
+var daily;
 //this is the array it pulls from
 // arr = [new set(arr)];
 // theroretically
@@ -91,14 +93,14 @@ function getSearch(event) {
 }
 
 
+
+
+
+
+
+
+
 function getAPIs() {
-
-
-
-
-
-
-    
 
 
     // var geoApi = "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7";
@@ -133,26 +135,29 @@ function getAPIs() {
                 return;
             } else { document.getElementById("alert").style.display = "none"; }
 
+
             //name of search
-            var name = data1[0].name;
-            console.log(name)
+            namee = data1[0].name;
+            console.log(namee)
 
             //longitude
-            var lon = data1[0].lon;
-            console.log(name + " is at " + lon + " lon");
+            lon = data1[0].lon;
+            console.log(namee + " is at " + lon + " lon");
             //latitude
-            var lat = data1[0].lat;
-            console.log(name + " is at " + lat + " lat");
+            lat = data1[0].lat;
+            console.log(namee + " is at " + lat + " lat");
 
             // getWeatherApi();
 
-
-           
-            // });
-            // function getWeatherApi() {
+            getAPIs2();
+           });
+}            // });
+function getAPIs2() {          // function getWeatherApi() {
                 // var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7";
                 // fetch(weatherApi)
+                console.log(namee + " is at " + lat + " lat");
                 $.ajax({
+                    
                     url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7",
                     method: 'GET',
                     dataType: 'JSON',
@@ -167,15 +172,21 @@ function getAPIs() {
                         console.log("This is the data of the weatherApi", data2);
 
                         //current
-                        var current = data2.current;
+                        current = data2.current;
                         console.log("current: ", current);
                         //daily for 8 days
-                        var daily = data2.daily;
+                        daily = data2.daily;
                         console.log("daily: ", daily);
+                        
+                        appendEVERYTHING()
+});
+}
 
+
+function appendEVERYTHING() {
                         //update container with the weather data and set visibility to visible
                         document.getElementById("hideAway").style.visibility    = "visible";
-                        document.getElementById("currentName").innerHTML        = name;
+                        document.getElementById("currentName").innerHTML        = namee;
                         document.getElementById("currentIcon").src              = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
                         document.getElementById("currentIcon").style.width      = "100px";
                         document.getElementById("currentHumidity").innerHTML    = current.humidity;
@@ -225,9 +236,9 @@ function getAPIs() {
 
                         }
                     // })
-            });
-        });
-}
+            
+        }       
+
 
 
 loadHistory()
