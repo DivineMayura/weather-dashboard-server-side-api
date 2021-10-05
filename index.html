@@ -21,10 +21,7 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#">Created By: May Faucher <span class="sr-only">(current)</span></a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li> -->
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 My Links
@@ -45,8 +42,10 @@
         <form class="form-inline" id="searchArea">
           <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="City Name" name="searchBar" aria-label="Search">
           <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          <span id="deleteThis"> Try typing something into the search bar!</span>
-          <div id="alert" class="alert alert-warning alert-dismissible fade show ml-5" role="alert">
+          <div id="deleteThis" class="alert alert-success alert-dismissible fade show ml-5" role="alert">
+            <strong>Hello! </strong> Try typing something into the Search Bar!
+          </div>
+          <div id="alert" class="alert alert-danger alert-dismissible fade show ml-5" role="alert">
             <strong>Oh NO! </strong> The Location you entered is invalid!
           </div>
         </form>
