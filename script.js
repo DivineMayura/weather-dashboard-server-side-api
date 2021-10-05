@@ -89,13 +89,8 @@ function getSearch(event) {
     appendHistory();
     saveHistory();
     getAPIs();
-
+    document.getElementById("deleteThis").style.display = "none";
 }
-
-
-
-
-
 
 
 function getAPIs() {
@@ -152,9 +147,9 @@ function getAPIs() {
                         var daily = data2.daily;
                         console.log("daily: ", daily);
 
+                        //update container with the weather data and set visibility to visible
                         document.getElementById("hideAway").style.visibility = "visible";
                         document.getElementById("currentName").innerHTML = name;
-
                         document.getElementById("currentIcon").src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
                         document.getElementById("currentIcon").style.width = "100px";
                         document.getElementById("currentHumidity").innerHTML = current.humidity;
@@ -178,41 +173,30 @@ function getAPIs() {
                         //area for 5 day forecast
                         document.getElementById("currentDay").innerHTML = moment.unix(current.dt).format("YYYY, MMMM, dddd");
 
+                        //loop for all the days I have displayed
                         for (n=1;n<6;n++){
 
                             var dtime = "day"+n+"Time";
                             var dday = "day"+n+"Day";
 
-                         
-
                             document.getElementById(dtime).innerHTML = moment.unix(daily[n].dt).format("YYYY, MM, DD");
                             document.getElementById(dday).innerHTML = moment.unix(daily[n].dt).format("dddd");
-
-
-
-
-
-
-
-
 
 
                             var Icon = "day"+n+"Icon";
                             var Temp = "day"+n+"Temp";
                             var Humidity = "day"+n+"Humidity";
 
-
+                                //gets average temperature instead of just the min or the max
                                 var temperatureAverage = Math.trunc((daily[n].temp.max + daily[n].temp.min) / 2 );
                                 console.log("Temperature Average", temperatureAverage);
 
+                                //using for loop, this updates the cards with content
                                 document.getElementById(Temp).innerHTML = temperatureAverage
                                 document.getElementById(Humidity).innerHTML = daily[n].humidity
-
-
                                 document.getElementById(Icon).src = "http://openweathermap.org/img/wn/" + daily[n].weather[0].icon + "@2x.png";
                                 document.getElementById(Icon).style.width = "50px";
-                        
-                            // }
+                    
                         }
 
 
