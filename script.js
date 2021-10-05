@@ -51,6 +51,8 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+$(document).ready()
+
 
 var historyGroup = $("#historyButtonGroup");
 
@@ -64,75 +66,6 @@ var arr = [];
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-loadHistory()
-function loadHistory() {
-    arr = JSON.parse(localStorage.getItem("storedHistory"));
-    if (arr === null) {
-        var arr = ["", "", "", "", ""];
-        return;
-    }
-    console.log("loading History")
-    for (i = 0; i < arr.length; i++) {
-        console.log(arr.length)
-        if (arr.length > 6) {
-            arr.pop();
-        };
-        document.getElementById(i).innerHTML = arr[i];
-    }
-}
-
-
-
-function appendHistory() {
-    console.log("appending History")
-    for (i = 0; i < arr.length; i++) {
-        console.log(arr.length)
-        if (arr.length > 6) {
-            arr.pop();
-        };
-        document.getElementById(i).innerHTML = arr[i];
-    }
-}
-
-
-function saveHistory() {
-    console.log("Saving History")
-    arra = [];
-    for (x = 0; x < 6; x++) {
-        arraysave = document.getElementById(x).innerHTML;
-        arra.push(arraysave)
-        localStorage.setItem("storedHistory", JSON.stringify(arra))
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready()
 $('#searchArea').on("submit", $("button"), getSearch);
 var searchValue = $("input").val();
 
@@ -263,3 +196,43 @@ function getAPIs() {
 }
 
 
+loadHistory()
+function loadHistory() {
+    arr = JSON.parse(localStorage.getItem("storedHistory"));
+    if (arr === null) {
+        var arr = ["", "", "", "", ""];
+        return;
+    }
+    console.log("loading History")
+    for (i = 0; i < arr.length; i++) {
+        console.log(arr.length)
+        if (arr.length > 6) {
+            arr.pop();
+        };
+        document.getElementById(i).innerHTML = arr[i];
+    }
+}
+
+
+
+function appendHistory() {
+    console.log("appending History")
+    for (i = 0; i < arr.length; i++) {
+        console.log(arr.length)
+        if (arr.length > 6) {
+            arr.pop();
+        };
+        document.getElementById(i).innerHTML = arr[i];
+    }
+}
+
+
+function saveHistory() {
+    console.log("Saving History")
+    arra = [];
+    for (x = 0; x < 6; x++) {
+        arraysave = document.getElementById(x).innerHTML;
+        arra.push(arraysave)
+        localStorage.setItem("storedHistory", JSON.stringify(arra))
+    }
+}
