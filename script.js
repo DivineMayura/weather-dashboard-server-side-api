@@ -93,7 +93,7 @@ function getSearch(event) {
 
 function getAPIs() {
 
-    var geoApi = ("https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7");
+    var geoApi = "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7";
     fetch(geoApi)
 
         .then(function (response1) {
@@ -126,7 +126,7 @@ function getAPIs() {
             getWeatherApi();
 
             function getWeatherApi() {
-                var weatherApi = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7");
+                var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7";
                 fetch(weatherApi)
 
                     .then(function (response2) {
