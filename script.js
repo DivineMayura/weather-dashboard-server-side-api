@@ -118,7 +118,7 @@ function getAPIs() {
             // });
 
             // fetch(geoApi)
-
+                                                //removed all of the fetch content to see if it would work with ajax instead, and it does. but the bug still persists on the deployed link.
         
             // if (response1 == 400) {
             //     console.log("Incorrect Name Input")
