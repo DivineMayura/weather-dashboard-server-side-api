@@ -8,14 +8,12 @@
   <link rel="shortcut icon" href="#">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
   <title>Weather Dashboard</title>
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 </head>
 
 <body>
-  <!--  -->
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Weather Dashboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -26,7 +24,6 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Created By: May Faucher <span class="sr-only">(current)</span></a>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -35,15 +32,11 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="https://github.com/DivineMayura" target="_blank">GitHub</a>
             <a class="dropdown-item" href="www.linkedin.com/in/mayfaucher" target="_blank">LinkedIn</a>
-            <!-- <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a> -->
-              </div>
+          </div>
         </li>
       </ul>
     </div>
   </nav>
-
-  <!--  -->
   <nav id="hereLol" class="navbar navbar-light bg-light">
     <form class="form-inline" id="searchArea">
       <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="City Name" name="searchBar"
@@ -58,8 +51,6 @@
     </form>
     </div>
   </nav>
-
-
   <div class="card float-left col-md-2">
     <h5 class="card-title text-center">History</h5>
     <ul class="list-group">
@@ -71,27 +62,20 @@
       <li id="5" class="list-group-item text-center"> </li>
     </ul>
   </div>
-
-
   <div id="hideAway" class="col container">
     <div id="outerCurrent">
       <div class="card mb-3 bg-dark text-white h-80">
         <div class="card-body">
           <h4 id="currentDay" class="card-title">current TIME</h4>
           <img id="currentIcon" class="card-img-top" alt="Weather Icon will update after Search">
-
           <h5 class="card-title">Current Weather in <span id="currentName"></span></h5>
           <p class="card-text">humidity: <span id="currentHumidity"></span></p>
           <p class="card-text">Temperature: <span id="currentTemperature"></span></p>
           <p class="card-text">UV Index: <span id="currentUVI"></span></p>
-
         </div>
       </div>
     </div>
-
-
     <div class="row justify-content-center" id="forecastWeatherAlertsContainers">
-
       <div class="card text-white bg-primary col-xs-12 col-sm-12 col-md-6" style="max-width: 18rem;">
         <div id="day1Time" class="card-header text-center">DATE</div>
         <div id="day1Body" class="card-body">
@@ -101,7 +85,6 @@
           <p class="card-text">Humidity: <span id="day1Humidity"></span></p>
         </div>
       </div>
-
       <div class="card text-white bg-primary col-xs-12 col-sm-12 col-md-6" style="max-width: 18rem;">
         <div id="day2Time" class="card-header text-center">DATE</div>
         <div id="day2Body" class="card-body">
@@ -111,7 +94,6 @@
           <p class="card-text">Humidity: <span id="day2Humidity"></span></p>
         </div>
       </div>
-
       <div class="card text-white bg-primary col-xs-12 col-sm-12 col-md-6" style="max-width: 18rem;">
         <div id="day3Time" class="card-header text-center">DATE</div>
         <div id="day3Body" class="card-body">
@@ -121,7 +103,6 @@
           <p class="card-text">Humidity: <span id="day3Humidity"></span></p>
         </div>
       </div>
-
       <div class="card text-white bg-primary col-xs-12 col-sm-12 col-md-6" style="max-width: 18rem;">
         <div id="day4Time" class="card-header text-center">DATE</div>
         <div id="day4Body" class="card-body">
@@ -131,7 +112,6 @@
           <p class="card-text">Humidity: <span id="day4Humidity"></span></p>
         </div>
       </div>
-
       <div class="card text-white bg-primary col-xs-12 col-sm-12 col-md-6" style="max-width: 18rem;">
         <div id="day5Time" class="card-header text-center">DATE</div>
         <div id="day5Body" class="card-body">
@@ -141,21 +121,14 @@
           <p class="card-text">Humidity: <span id="day5Humidity"></span></p>
         </div>
       </div>
-
     </div>
   </div>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
-  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="script.js"></script>
 </body>
