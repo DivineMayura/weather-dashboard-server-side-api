@@ -103,7 +103,7 @@ function getSearch(event) {
 function getAPIs() {
 
     $.ajax({
-        url: "https//:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7",
+        url: "https://api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7",
         method: 'GET',
         dataType: 'JSON',
     })
