@@ -126,7 +126,7 @@ function getAPIs() {
             getWeatherApi();
 
             function getWeatherApi() {
-                var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7"
+                var weatherApi = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7");
                 fetch(weatherApi)
 
                     .then(function (response2) {
