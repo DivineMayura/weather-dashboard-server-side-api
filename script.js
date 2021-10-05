@@ -1,4 +1,4 @@
-
+$(document).ready()
 
 
 //      for later          https://getbootstrap.com/docs/4.3/getting-started/introduction/
@@ -83,7 +83,7 @@ function getSearch(event) {
 }
 
 
-$(function getAPIs() {
+function getAPIs() {
 
     var geoApi = "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7";
     fetch(geoApi)
@@ -115,9 +115,9 @@ $(function getAPIs() {
             var lat = data1[0].lat;
             console.log(name + " is at " + lat + " lat");
 
-            $(getWeatherApi());
+            getWeatherApi();
 
-            $(function getWeatherApi() {
+            function getWeatherApi() {
                 var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7"
                 fetch(weatherApi)
 
@@ -187,9 +187,9 @@ $(function getAPIs() {
 
                         }
                     })
-            });
+            }
         });
-});
+}
 
 loadHistory()
 function loadHistory() {
