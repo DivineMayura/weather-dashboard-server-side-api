@@ -19,7 +19,7 @@ Type in locations to view weather and display date.
 
 ## Deployed Link
 
-* [See Live Site](#)
+* [See Live Site](https://divinemayura.github.io/weather-dashboard-server-side-api/)
 
 
 ## Author

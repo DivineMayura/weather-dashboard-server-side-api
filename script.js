@@ -59,6 +59,10 @@ var historyGroup = $("#historyButtonGroup");
 //this is the array it pushes to
 var arr = [];
 
+
+
+
+
 //this is the array it pulls from
 // arr = [new set(arr)];
 // theroretically
@@ -89,7 +93,7 @@ function getSearch(event) {
 
 function getAPIs() {
 
-    var geoApi = "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7";
+    var geoApi = ("https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7");
     fetch(geoApi)
 
         .then(function (response1) {
@@ -140,13 +144,13 @@ function getAPIs() {
                         console.log("daily: ", daily);
 
                         //update container with the weather data and set visibility to visible
-                        document.getElementById("hideAway").style.visibility = "visible";
-                        document.getElementById("currentName").innerHTML = name;
-                        document.getElementById("currentIcon").src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
-                        document.getElementById("currentIcon").style.width = "100px";
-                        document.getElementById("currentHumidity").innerHTML = current.humidity;
+                        document.getElementById("hideAway").style.visibility    = "visible";
+                        document.getElementById("currentName").innerHTML        = name;
+                        document.getElementById("currentIcon").src              = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
+                        document.getElementById("currentIcon").style.width      = "100px";
+                        document.getElementById("currentHumidity").innerHTML    = current.humidity;
                         document.getElementById("currentTemperature").innerHTML = current.temp;
-                        document.getElementById("currentUVI").innerHTML = current.uvi;
+                        document.getElementById("currentUVI").innerHTML         = current.uvi;
 
                         if (current.uvi < 3) {
                             console.log("green");
@@ -236,3 +240,5 @@ function saveHistory() {
         localStorage.setItem("storedHistory", JSON.stringify(arra))
     }
 }
+
+
