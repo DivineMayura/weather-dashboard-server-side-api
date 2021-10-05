@@ -205,7 +205,7 @@ function loadHistory() {
     }
     console.log("loading History")
     for (i = 0; i < arr.length; i++) {
-        console.log(arr.length)
+        // console.log(arr.length)
         if (arr.length > 6) {
             arr.pop();
         };
