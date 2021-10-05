@@ -93,18 +93,39 @@ function getSearch(event) {
 
 function getAPIs() {
 
+
+
+
+
+
+    
+
+
     var geoApi = "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7";
-    fetch(geoApi)
 
-        .then(function (response1) {
-            console.log("This is the response of the geocodingApi", response1);
 
-            if (response1 == 400) {
-                console.log("Incorrect Name Input")
-            }
-            return response1.json();
-        })
-        .then(function (data1) {
+
+            $.ajax({
+                url: geoApi,
+                method: 'GET',
+                dataType: 'JSON',
+            })
+
+
+            .done(function(data1){
+            console.log(data1)
+
+            // });
+
+            // fetch(geoApi)
+
+        
+            // if (response1 == 400) {
+            //     console.log("Incorrect Name Input")
+            // }
+            // return response1.json()
+
+        // .then(function (data1) {
             console.log("This is the data of the geocodingApi", data1);
 
             if (data1.length == 0) {
@@ -123,17 +144,26 @@ function getAPIs() {
             var lat = data1[0].lat;
             console.log(name + " is at " + lat + " lat");
 
-            getWeatherApi();
+            // getWeatherApi();
 
-            function getWeatherApi() {
+
+           
+            // });
+            // function getWeatherApi() {
                 var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7";
-                fetch(weatherApi)
-
-                    .then(function (response2) {
-                        console.log("This is the response of the weatherApi", response2);
-                        return response2.json();
-                    })
-                    .then(function (data2) {
+                // fetch(weatherApi)
+                    $.ajax({
+                                    url: weatherApi,
+                                    method: 'GET',
+                                    dataType: 'JSON',
+                                })
+                                .done(function(data2){
+                                console.log(data2)
+                    // .then(function (response2) {
+                        // console.log("This is the response of the weatherApi", response2);
+                        // return response2.json();
+                    // })
+                    // .then(function (data2) {
                         console.log("This is the data of the weatherApi", data2);
 
                         //current
@@ -194,8 +224,8 @@ function getAPIs() {
                             document.getElementById(Icon).style.width = "50px";
 
                         }
-                    })
-            }
+                    // })
+            });
         });
 }
 
