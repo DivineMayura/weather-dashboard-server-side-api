@@ -49,29 +49,24 @@
 // push { value:"searchTerm"}
 //then I update the array
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// $(document).ready()
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var historyGroup = $("#historyButtonGroup");
 
-//this is the array it pushes to
+//this is the array it pushes to from line 78 as well as local storage
 var arr = [];
 
+//delcaring global variables so I can access them in different functions
 var lon;
 var lat;
 var namee;
-
 var current;
 var daily;
-//this is the array it pulls from
-// arr = [new set(arr)];
-// theroretically
 
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//event listener for search button
 $('#searchArea').on("submit", $("button"), getSearch);
 var searchValue = $("input").val();
 
@@ -82,52 +77,25 @@ function getSearch(event) {
     var searchValue = $("input").val();
     console.log("Searching for " + searchValue);
 
-
     arr.unshift(searchValue);
-
-
     appendHistory();
     saveHistory();
     getAPIs();
     document.getElementById("deleteThis").style.display = "none";
 }
-
-
-
-
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////first fetch function///////////////////////////////////////////////////////////////////////////////////////////////////////
 function getAPIs() {
-
-
-    // var geoApi = "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7";
-
-
 
     $.ajax({
         url: "https:api.openweathermap.org/geo/1.0/direct?q=" + arr[0] + "&limit=1&appid=5de4fe643c36c638596fa3acd666e2a7",
         method: 'GET',
         dataType: 'JSON',
     })
-
-
         .done(function (data1) {
+
             console.log(data1)
-
-            // });
-
-            // fetch(geoApi)
-                                                //removed all of the fetch content to see if it would work with ajax instead, and it does. but the bug still persists on the deployed link.
-        
-            // if (response1 == 400) {
-            //     console.log("Incorrect Name Input")
-            // }
-            // return response1.json()
-
-        // .then(function (data1) {
             console.log("This is the data of the geocodingApi", data1);
 
             if (data1.length == 0) {
@@ -135,11 +103,9 @@ function getAPIs() {
                 return;
             } else { document.getElementById("alert").style.display = "none"; }
 
-
             //name of search
             namee = data1[0].name;
             console.log(namee)
-
             //longitude
             lon = data1[0].lon;
             console.log(namee + " is at " + lon + " lon");
@@ -147,99 +113,98 @@ function getAPIs() {
             lat = data1[0].lat;
             console.log(namee + " is at " + lat + " lat");
 
-            // getWeatherApi();
+            getAPIs2(); //starts second fetch after this one has completed
+        });
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//second fetch using variables stated in first as search parameters/////////////////////////////////////////////////////////////////////////////
+function getAPIs2() {
 
-            getAPIs2();
-           });
-}            // });
-function getAPIs2() {          // function getWeatherApi() {
-                // var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7";
-                // fetch(weatherApi)
-                console.log(namee + " is at " + lat + " lat");
-                $.ajax({
-                    
-                    url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7",
-                    method: 'GET',
-                    dataType: 'JSON',
-                })
-                    .done(function (data2) {
-                        console.log(data2)
-                    // .then(function (response2) {
-                        // console.log("This is the response of the weatherApi", response2);
-                        // return response2.json();
-                    // })
-                    // .then(function (data2) {
-                        console.log("This is the data of the weatherApi", data2);
+    console.log(namee + " is at " + lat + " lat");
+    $.ajax({
 
-                        //current
-                        current = data2.current;
-                        console.log("current: ", current);
-                        //daily for 8 days
-                        daily = data2.daily;
-                        console.log("daily: ", daily);
-                        
-                        appendEVERYTHING()
-});
+        url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=5de4fe643c36c638596fa3acd666e2a7",
+        method: 'GET',
+        dataType: 'JSON',
+    })
+        .done(function (data2) {
+            console.log(data2)
+
+            console.log("This is the data of the weatherApi", data2);
+
+            //current weather
+            current = data2.current;
+            console.log("current: ", current);
+            //daily weather
+            daily = data2.daily;
+            console.log("daily: ", daily);
+
+             appendEVERYTHING(); //function to set allll the data to the page after the second fetch has retrieved it
+        });
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//update container with the weather data and set visibility of content to visible///////////////////////////////////////////////////////////////
+function appendEVERYTHING() {
+
+    document.getElementById("hideAway").style.visibility = "visible";
+    document.getElementById("currentName").innerHTML = namee;
+    document.getElementById("currentIcon").src = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
+    document.getElementById("currentIcon").style.width = "100px";
+    document.getElementById("currentHumidity").innerHTML = current.humidity;
+    document.getElementById("currentTemperature").innerHTML = current.temp;
+    document.getElementById("currentUVI").innerHTML = current.uvi;
+
+    if (current.uvi < 3) {
+        console.log("green");
+        var color = "var(--mg)"
+    } else if (current.uvi < 6) {
+        console.log("yellow");
+        var color = "var(--y)"
+    } else if (current.uvi < 8) {
+        console.log("orange");
+        var color = "orange"
+    } else { console.log("red"); var color = "var(--r)" }
+
+    console.log(color);
+    document.getElementById("currentUVI").style.color = color;
+
+    //area for 5 day forecast
+    document.getElementById("currentDay").innerHTML = moment.unix(current.dt).format("YYYY, MMMM, dddd");
+
+    //loop for all the days I have displayed
+    for (n = 1; n < 6; n++) {
+
+        var dtime = "day" + n + "Time";
+        var dday = "day" + n + "Day";
+
+        document.getElementById(dtime).innerHTML = moment.unix(daily[n].dt).format("YYYY, MM, DD");
+        document.getElementById(dday).innerHTML = moment.unix(daily[n].dt).format("dddd");
+
+
+        var Icon = "day" + n + "Icon";
+        var Temp = "day" + n + "Temp";
+        var Humidity = "day" + n + "Humidity";
+
+        //gets average temperature instead of just the min or the max
+        var temperatureAverage = Math.trunc((daily[n].temp.max + daily[n].temp.min) / 2);
+        console.log("Temperature Average", temperatureAverage);
+
+        //using for loop, this updates the cards with content
+        document.getElementById(Temp).innerHTML = temperatureAverage
+        document.getElementById(Humidity).innerHTML = daily[n].humidity
+        document.getElementById(Icon).src = "http://openweathermap.org/img/wn/" + daily[n].weather[0].icon + "@2x.png";
+        document.getElementById(Icon).style.width = "50px";
+
+    }
 }
 
 
-function appendEVERYTHING() {
-                        //update container with the weather data and set visibility to visible
-                        document.getElementById("hideAway").style.visibility    = "visible";
-                        document.getElementById("currentName").innerHTML        = namee;
-                        document.getElementById("currentIcon").src              = "http://openweathermap.org/img/wn/" + current.weather[0].icon + "@2x.png";
-                        document.getElementById("currentIcon").style.width      = "100px";
-                        document.getElementById("currentHumidity").innerHTML    = current.humidity;
-                        document.getElementById("currentTemperature").innerHTML = current.temp;
-                        document.getElementById("currentUVI").innerHTML         = current.uvi;
 
-                        if (current.uvi < 3) {
-                            console.log("green");
-                            var color = "var(--mg)"
-                        } else if (current.uvi < 6) {
-                            console.log("yellow");
-                            var color = "var(--y)"
-                        } else if (current.uvi < 8) {
-                            console.log("orange");
-                            var color = "orange"
-                        } else { console.log("red"); var color = "var(--r)" }
-
-                        console.log(color);
-                        document.getElementById("currentUVI").style.color = color;
-
-                        //area for 5 day forecast
-                        document.getElementById("currentDay").innerHTML = moment.unix(current.dt).format("YYYY, MMMM, dddd");
-
-                        //loop for all the days I have displayed
-                        for (n = 1; n < 6; n++) {
-
-                            var dtime = "day" + n + "Time";
-                            var dday = "day" + n + "Day";
-
-                            document.getElementById(dtime).innerHTML = moment.unix(daily[n].dt).format("YYYY, MM, DD");
-                            document.getElementById(dday).innerHTML = moment.unix(daily[n].dt).format("dddd");
-
-
-                            var Icon = "day" + n + "Icon";
-                            var Temp = "day" + n + "Temp";
-                            var Humidity = "day" + n + "Humidity";
-
-                            //gets average temperature instead of just the min or the max
-                            var temperatureAverage = Math.trunc((daily[n].temp.max + daily[n].temp.min) / 2);
-                            console.log("Temperature Average", temperatureAverage);
-
-                            //using for loop, this updates the cards with content
-                            document.getElementById(Temp).innerHTML = temperatureAverage
-                            document.getElementById(Humidity).innerHTML = daily[n].humidity
-                            document.getElementById(Icon).src = "http://openweathermap.org/img/wn/" + daily[n].weather[0].icon + "@2x.png";
-                            document.getElementById(Icon).style.width = "50px";
-
-                        }
-                    // })
-            
-        }       
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Local storage/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 loadHistory()
 function loadHistory() {
@@ -281,5 +246,3 @@ function saveHistory() {
         localStorage.setItem("storedHistory", JSON.stringify(arra))
     }
 }
-
-
