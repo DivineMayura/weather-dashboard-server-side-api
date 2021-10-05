@@ -140,7 +140,7 @@ function getAPIs2() {
             daily = data2.daily;
             console.log("daily: ", daily);
 
-             appendEVERYTHING(); //function to set allll the data to the page after the second fetch has retrieved it
+            appendEVERYTHING(); //function to set allll the data to the page after the second fetch has retrieved it
         });
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
